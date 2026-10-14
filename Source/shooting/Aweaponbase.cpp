@@ -40,7 +40,7 @@ void AAweaponbase::Fire()
 		return;
 	}
 
-	// ===== 找枪口位置（从子组件里找） =====
+	//  找枪口位置
 	FVector MuzzleLocation = FVector::ZeroVector;
 
 	if (WeaponMesh)
@@ -78,7 +78,7 @@ void AAweaponbase::Fire()
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), MuzzleFlash, MuzzleLocation);
 	}
 
-	// ===== 从玩家摄像机发射射线 =====
+	//从玩家摄像机发射射线
 	APawn* OwnerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
 	if (!OwnerPawn || !OwnerPawn->GetController())
 	{
@@ -101,7 +101,7 @@ void AAweaponbase::Fire()
 
 	FVector AimPoint = bCameraHit ? CameraHit.Location : CameraEnd;
 
-	// ===== 从枪口向准星方向发射射线 =====
+	//从枪口向准星方向发射射线
 	FVector MuzzleDirection = (AimPoint - MuzzleLocation).GetSafeNormal();
 	FVector MuzzleEnd = MuzzleLocation + MuzzleDirection * Range;
 
@@ -114,7 +114,7 @@ void AAweaponbase::Fire()
 		MuzzleHit, MuzzleLocation, MuzzleEnd, ECC_Visibility, MuzzleParams);
 
 
-	// ===== 伤害 =====
+	// 伤害
 	UE_LOG(LogTemp, Warning, TEXT("MuzzleHit: %d, HitActor: %s"), bMuzzleHit, MuzzleHit.GetActor() ? *MuzzleHit.GetActor()->GetName() : TEXT("None"));
 	if (bMuzzleHit)
 	{
@@ -143,7 +143,7 @@ void AAweaponbase::Reload()
 
 	bIsReloading = true;
 
-	// 直接用一个定时器搞定换弹
+	// 直接用定时器搞换弹
 	GetWorldTimerManager().SetTimer(ReloadTimerHandle, [this]()
 		{
 			CurrentAmmo = MaxAmmo;

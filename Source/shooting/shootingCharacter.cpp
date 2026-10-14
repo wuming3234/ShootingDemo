@@ -90,14 +90,14 @@ void AshootingCharacter::BeginPlay()
 	}
 }
 
-// ========== 生成武器 ==========
+// 生成武器 
 void AshootingCharacter::SpawnWeapon()
 {
 	FActorSpawnParameters SpawnParams;
 	SpawnParams.Owner = this;
 	SpawnParams.Instigator = this;
 
-	// 动态加载 BP_weapon 蓝图
+	// 加载蓝图
 	UClass* WeaponBPClass = LoadClass<AAweaponbase>(nullptr, *WeaponBlueprintPath);
 
 	if (WeaponBPClass)
@@ -131,12 +131,12 @@ void AshootingCharacter::PickupWeapon()
 {
 	UE_LOG(LogTemp, Warning, TEXT("=== E pressed ==="));
 
-	// 遍历场景里所有武器
+	// 遍历场景里所有武器，然后设置拾取距离
 	TArray<AActor*> FoundWeapons;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AAweaponbase::StaticClass(), FoundWeapons);
 
 	AAweaponbase* ClosestWeapon = nullptr;
-	float ClosestDist = 500.0f; // 最大捡取距离（厘米）
+	float ClosestDist = 500.0f; 
 
 	for (AActor* Actor : FoundWeapons)
 	{
@@ -174,7 +174,7 @@ void AshootingCharacter::PickupWeapon()
 	}
 }
 
-// ========== 输入绑定 ==========
+// 用来输入绑定 
 void AshootingCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -238,7 +238,7 @@ void AshootingCharacter::Look(const FInputActionValue& Value)
 	}
 }
 
-// ========== 开火逻辑 ==========
+// 开火部分
 void AshootingCharacter::StartFire()
 {
 	bIsFiring = true;

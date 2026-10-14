@@ -41,10 +41,9 @@ void AEnemyBase::MoveToPlayer()
 {
 	if (!PlayerCharacter) return;
 
-	// 距离玩家多远
+	// 检查距离玩家多远部分，以及距离检测，超过距离开始追玩家
 	float Distance = FVector::Dist(GetActorLocation(), PlayerCharacter->GetActorLocation());
 
-	// 如果离得远，就追
 	if (Distance > AttackRange)
 	{
 		FVector Direction = (PlayerCharacter->GetActorLocation() - GetActorLocation()).GetSafeNormal();
@@ -56,7 +55,7 @@ void AEnemyBase::AttackPlayer()
 {
 	if (bIsDead || !PlayerCharacter) return;
 
-	// 如果在攻击范围内，就打玩家
+	// 检测玩家在不在攻击范围
 	float Distance = FVector::Dist(GetActorLocation(), PlayerCharacter->GetActorLocation());
 	if (Distance <= AttackRange)
 	{
@@ -76,7 +75,7 @@ float AEnemyBase::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent
 	{
 		bIsDead = true;
 		UE_LOG(LogTemp, Warning, TEXT("Enemy dead!"));
-		// 隐藏自己，归还池子
+		// 敌人死了归还对象池
 		SetActorHiddenInGame(true);
 		SetActorEnableCollision(false);
 		bIsDead = true;

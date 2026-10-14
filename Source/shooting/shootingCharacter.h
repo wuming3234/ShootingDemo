@@ -28,7 +28,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	// ========== 增强输入 ==========
+	//增强输入
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	class UInputMappingContext* DefaultMappingContext;
 
@@ -41,7 +41,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	class UInputAction* LookAction;
 
-	// ========== 战斗相关 ==========
+	// 战斗相关
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat")
 	class UInputAction* FireAction;
 
@@ -59,15 +59,15 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 	FName WeaponSocketName = "hand_r";
 
-	// 武器蓝图路径（在 UE 里右键 BP_weapon 复制引用后粘贴到这里）
+	// 武器蓝图路径
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 	FString WeaponBlueprintPath = "/Game/Fab/AK-105/BP_weapon.BP_weapon_C";
 
-	// 手里有没有枪（给动画蓝图用）
+	// 手里有没有枪
 	UPROPERTY(BlueprintReadOnly, Category = "Combat")
 	bool bHasWeapon = false;
 
-	// ========== 功能函数 ==========
+	//功能函数 
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 
@@ -83,7 +83,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Combat")
 	void PickupWeapon();
 
-	// ========== 玩家血量 ==========
+	// 玩家血量
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")
 	float Health = 100.0f;
 

@@ -25,7 +25,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// 伤害值
+	// 伤害
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WeaponStats")
 	float Damage = 10.0f;
 
@@ -37,7 +37,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WeaponStats")
 	float Range = 5000.0f;
 
-		// 武器模型组件（改成静态网格体）
+		// 武器模型组件
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	class UStaticMeshComponent* WeaponMesh;
 
@@ -57,7 +57,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WeaponEffects")
 	class UParticleSystem* MuzzleFlash;
 
-	// 开火时镜头上抬的角度（后坐力）
+	// 开火时镜头上抬的角度
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WeaponEffects")
 	float RecoilPitch = 2.0f;
 
@@ -74,14 +74,14 @@ public:
 	// 换弹函数
 	void Reload();
 
-	// 重置弹药（拾取后会用）
+	// 重置弹药
 	void ResetAmmo();
 
 	// 开火函数
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
 	void Fire();
 
-	// 获取射击起点和方向（由角色提供）
+	// 获取射击起点和方向
 	FVector GetFireStartLocation() const;
 	FVector GetFireDirection() const;
 

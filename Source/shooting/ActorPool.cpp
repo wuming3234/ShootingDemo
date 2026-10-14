@@ -17,7 +17,7 @@ void AActorPool::BeginPlay()
 
 	if (!PooledActorClass) return;
 
-	// 预创建一批
+	// 用来预创建
 	for (int32 i = 0; i < PoolSize; i++)
 	{
 		AActor* NewActor = GetWorld()->SpawnActor<AActor>(PooledActorClass, GetActorLocation(), GetActorRotation());
@@ -65,7 +65,7 @@ void AActorPool::SpawnOne()
 	AActor* Actor = GetFromPool();
 	if (Actor)
 	{
-		// 固定 4 个出生点，随机选一个
+		// 用来添加新生成的敌人位置行动等
 		FVector SpawnPoints[] = {
 			FVector(1000, 1000, 50),
 			FVector(-1000, 1000, 50),
@@ -84,7 +84,7 @@ void AActorPool::SpawnOne()
 			Enemy->bIsDead = false;
 			Enemy->PlayerCharacter = Cast<ACharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 
-			// 强制恢复移动
+			// 恢复移动，防止生成以后不追玩家
 			if (UCharacterMovementComponent* MoveComp = Enemy->GetCharacterMovement())
 			{
 				MoveComp->SetMovementMode(MOVE_Walking);
@@ -92,7 +92,7 @@ void AActorPool::SpawnOne()
 				MoveComp->Activate(true);
 			}
 
-			// 强制恢复碰撞和 Tick
+			// 恢复碰撞和 Tick这些
 			Enemy->SetActorEnableCollision(true);
 			Enemy->SetActorHiddenInGame(false);
 			Enemy->SetActorTickEnabled(true);

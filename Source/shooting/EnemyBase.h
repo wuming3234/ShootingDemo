@@ -36,7 +36,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy")
 	float AttackDamage = 10.0f;
 
-	// ¹¥»÷¼ä¸ô£¨Ãë£©
+	// ¹¥»÷¼ä¸ô
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy")
 	float AttackInterval = 1.0f;
 
